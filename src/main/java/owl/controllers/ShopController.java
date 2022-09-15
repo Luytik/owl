@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ShopController {
     @GetMapping
     public String getShopPage(){
-        return "shop.html";
+        return "shop";
     }
 }

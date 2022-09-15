@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/")
-public class IndexController {
+@RequestMapping(value = "/shop-single")
+public class ShopSingleController {
     @GetMapping
-    public String indexPage() {
-        return "index";
+    public String getShopPage(){
+        return "shop-single";
     }
 }

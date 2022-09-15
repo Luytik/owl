@@ -13,22 +13,23 @@ import java.io.File;
 @Configuration
 public class AppConfig implements WebMvcConfigurer {
 
-    @Bean
+    /*@Bean
     public CommandLineRunner firstInput(final SalesListService salesListService){
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                Goods goods = new Goods();
+                //Goods goods = new Goods();
                 SalesList goodsForSaling = new SalesList();
                 for(long i = 1; i < 5; i++){
-                    goodsForSaling.setGoods(goods);
+                    //goodsForSaling.setGoods(goods);
                     goodsForSaling.setDescription("short description");
                     goodsForSaling.setPrice(22.0);
                     goodsForSaling.setSelfPrice(16.0);
-                    goodsForSaling.setPictureAsJSON(new File("E:\\PRJS\\owl\\pictures\\2.png"));
+                    goodsForSaling.setPathToPicture("E://PRJS/owl/pictures/a.jpg");
+                    salesListService.addGoodsForSaling(goodsForSaling);
                 }
             }
         };
-    }
+    }*/
 
 }
