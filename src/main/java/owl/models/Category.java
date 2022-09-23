@@ -1,16 +1,18 @@
 package owl.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
+@Setter
+@Getter
+@ToString
 public class Category {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -24,4 +26,7 @@ public class Category {
     )
     private List<ProductForSale> productForSale;
 
+    public Category(String name){
+        this.name = name;
+    }
 }

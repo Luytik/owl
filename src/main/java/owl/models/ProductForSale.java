@@ -12,6 +12,7 @@ import java.util.List;
 public class ProductForSale {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, unique = true)
