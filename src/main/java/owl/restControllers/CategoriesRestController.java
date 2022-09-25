@@ -7,19 +7,21 @@ import org.springframework.web.bind.annotation.RestController;
 import owl.dto.CategoriesDTO;
 import owl.services.CategoryService;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/categories")
-public class UploadProductsRestController {
+@RequestMapping("/getAllCategories")
+public class CategoriesRestController {
 
     private final CategoryService categoryService;
 
     @Autowired
-    public UploadProductsRestController(CategoryService categoryService) {
+    public CategoriesRestController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
     @GetMapping
-    public CategoriesDTO getCategories(){
+    public List<String> getAllCategories(){
         return CategoriesDTO.of(categoryService.getAllCategories());
     }
 }

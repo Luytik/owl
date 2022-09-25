@@ -14,11 +14,11 @@ public class CategoriesDTO {
         this.categories = categories;
     }
 
-    public static CategoriesDTO of(List<Category> categories){
+    public static List<String> of(List<Category> categories){
         List<String> categoryNames = new ArrayList<>();
         for(Category c: categories){
             categoryNames.add(c.getName());
         }
-        return new CategoriesDTO(categoryNames);
+        return categoryNames;
     }
 }

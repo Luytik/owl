@@ -1,14 +1,17 @@
 package owl.models;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
+@Setter
+@Getter
 public class ProductForSale {
 
     @Id
@@ -33,4 +36,12 @@ public class ProductForSale {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<Category> categories;
+
+    public ProductForSale(String name, String shortDescriprion, String longDescriprion, String price, String mainPictureUrl) {
+        this.name = name;
+        this.shortDescriprion = shortDescriprion;
+        this.longDescriprion = longDescriprion;
+        this.price = price;
+        this.mainPictureUrl = mainPictureUrl;
+    }
 }
