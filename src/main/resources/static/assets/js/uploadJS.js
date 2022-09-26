@@ -7,7 +7,7 @@ $(document).ready(function(){
             checkbox.type = "checkbox";
             checkbox.name = 'category' + i;
             checkbox.value = data[i];
-            checkbox.id = i;
+            checkbox.id = 'category' + i;
             let label = document.createElement('label');
             label.htmlFor = i;
             label.appendChild(document.createTextNode(data[i]));
@@ -18,3 +18,5 @@ $(document).ready(function(){
         }
     });
 });
+
+

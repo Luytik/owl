@@ -14,10 +14,10 @@
                     <div class="form-group">
                         <label for="name">Назва:</label>
                         <input type="text" id="name" name="name"><br><br>
-                        <label for="shortDesc">Короткий опис:</label>
-                        <input type="text" id="shortDesc" name="shortDesc"><br><br>
-                        <label for="longDesc">Повний опис:</label>
-                        <input type="text" id="longDesc" name="longDesc" size = 100 height="200"><br><br>
+                        <label for="shortDescriprion">Короткий опис:</label>
+                        <input type="text" id="shortDescriprion" name="shortDescriprion"><br><br>
+                        <label for="longDescriprion">Повний опис:</label>
+                        <input type="text" id="longDescriprion" name="longDescriprion" size = 100 height="200"><br><br>
                         <label for="price">Ціна:</label>
                         <input type="text" id="price" name="price" size = 10><br><br>
                         <p> Виберіть категорію </p>
@@ -27,18 +27,20 @@
                         <input type="file" id = "image" name="image" accept="image/*" class="form-control-file">
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Зберегти</button>
+                    <button type="submit" id = "btn">Зберегти</button>
                 </form>
                 <span th:if="${msg != null}" th:text="${msg}"></span>
             </div>
         </div>
+    </div>
+    <div id="msg">
+        <pre></pre>
     </div>
 </section>
 <!-- Start Script -->
 <script src="assets/js/jquery-1.11.0.min.js"></script>
 <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/templatemo.js"></script>
 <script src="assets/js/uploadJS.js"></script>
 <!-- End Script -->
 </body>

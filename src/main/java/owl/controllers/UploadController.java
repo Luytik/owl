@@ -3,11 +3,10 @@ package owl.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import owl.dto.CategoriesDTO;
+import owl.models.Category;
 import owl.models.ProductForSale;
 import owl.services.ProductForSaleService;
 
@@ -34,19 +33,26 @@ public class UploadController {
         return "uploadGoods";
     }
 
-    @PostMapping
+    /*@PostMapping
     public String uploadGoodsToDB(Model model, @RequestParam("image")MultipartFile image,
                                   @RequestParam("name") String name, @RequestParam("shortDesc") String shortDesc,
                                   @RequestParam("longDesc") String longDesc, @RequestParam("price") String price) {
-        
+
+
         ProductForSale productForSale = new ProductForSale(name, shortDesc, longDesc, price, image.getOriginalFilename());
-        productForSaleService.addProduct(productForSale);
-        try {
-            uploadImageToFolder(image, name);
+        productForSaleService.addProduct(productForSale);*/
+    @PostMapping
+    public String uploadGoodsToDB(Model model, @RequestParam("image")MultipartFile image,
+                                  @ModelAttribute ProductForSale productForSale ) {
+        productForSale.setMainPictureUrl(image.getOriginalFilename());
+        System.out.println(productForSale.toString());
+        /*try {
+            uploadImageToFolder(image, productForSale.getName());
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
         model.addAttribute("msg", "Uploaded images: " + image.getOriginalFilename());
+
         return "uploadGoods";
     }
 

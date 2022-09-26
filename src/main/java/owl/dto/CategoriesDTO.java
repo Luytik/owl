@@ -8,6 +8,7 @@ import java.util.List;
 
 @Data
 public class CategoriesDTO {
+
     private final List<String> categories;
 
     public CategoriesDTO(List<String> categories) {
