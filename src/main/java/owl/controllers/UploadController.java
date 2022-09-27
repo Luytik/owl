@@ -40,13 +40,13 @@ public class UploadController {
         ProductForSale productForSale = productForSaleService.convererFromDTO(productsForSaleDTO);
         productForSaleService.addProduct(productForSale);
         System.out.println(productForSale.toString());
-        /*try {
-            uploadImageToFolder(image, productForSale.getName());
+        try {
+            uploadImageToFolder(productsForSaleDTO.getImage(), productForSale.getName());
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
-        /*model.addAttribute("msg", "Uploaded images: " +
-                productForSale.getMultipartFile().getOriginalFilename());*/
+        }
+        model.addAttribute("msg", "Uploaded images: " +
+                productsForSaleDTO.getImage().getOriginalFilename());
         return "uploadGoods";
     }
 
