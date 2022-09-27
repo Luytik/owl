@@ -5,7 +5,7 @@ $(document).ready(function(){
         for (i = 0; i < data.length; i++) {
             let checkbox = document.createElement('input');
             checkbox.type = "checkbox";
-            checkbox.name = 'category' + i;
+            checkbox.name = 'categories';
             checkbox.value = data[i];
             checkbox.id = 'category' + i;
             let label = document.createElement('label');

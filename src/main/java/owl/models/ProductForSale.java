@@ -35,6 +35,8 @@ public class ProductForSale {
     )
     private List<Category> categories;
 
+
+
     public ProductForSale(String name, String shortDescriprion, String longDescriprion, String price, String mainPictureUrl) {
         this.name = name;
         this.shortDescriprion = shortDescriprion;

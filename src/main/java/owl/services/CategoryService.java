@@ -26,4 +26,10 @@ public class CategoryService {
     public void addCategory(Category category){
         categoryRepository.save(category);
     }
+
+    @Transactional
+    public void findByName(String name){
+        categoryRepository.findCategoryByName(name);
+    }
 }
+
