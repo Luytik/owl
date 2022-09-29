@@ -17,7 +17,7 @@ public class AppConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/upload/**").addResourceLocations("file:///" + System.getProperty("user.dir") + "/src/main/upload/");
     }
 
-    @Bean
+   /* @Bean
     public CommandLineRunner firstInput(final CategoryService categoryService){
         return new CommandLineRunner() {
             @Override
@@ -30,6 +30,6 @@ public class AppConfig implements WebMvcConfigurer {
                 categoryService.addCategory(category3);
             }
         };
-    }
+    }*/
 
 }
