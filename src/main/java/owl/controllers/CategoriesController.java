@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import owl.dto.CategoriesDTO;
-import owl.dto.CategoryDTO;
+import owl.dto.CategoryDtoFromForm;
 import owl.models.Category;
 import owl.services.CategoryService;
 
@@ -31,9 +31,9 @@ public class CategoriesController {
     }
 
     @PostMapping("/add")
-    public String addNewCategory(@ModelAttribute CategoryDTO categoryDTO){
+    public String addNewCategory(@ModelAttribute CategoryDtoFromForm categoryDTO){
         Category category;
-        category = CategoryDTO.of(categoryDTO);
+        category = CategoryDtoFromForm.of(categoryDTO);
         categoryService.addCategory(category);
         try {
             uploadImageToFolder(categoryDTO.getImage(), categoryDTO.getName());

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $.getJSON('/getAllCategories', function(data) {
+    $.getJSON('/categories/getAllCategoriesAsStringArray', function(data) {
         let hold = document.getElementById("checkbox");
         let i;
         for (i = 0; i < data.length; i++) {

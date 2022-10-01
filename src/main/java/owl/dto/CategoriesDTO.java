@@ -16,11 +16,12 @@ public class CategoriesDTO {
         this.categories = categories;
     }
 
-    public static List<String> of(List<Category> categories){
+    public static List<String> asStringList(List<Category> categories){
         List<String> categoryNames = new ArrayList<>();
         for(Category c: categories){
             categoryNames.add(c.getName());
         }
         return categoryNames;
     }
+
 }

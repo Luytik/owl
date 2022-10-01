@@ -1,22 +1,25 @@
 package owl.dto;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.Setter;
 import owl.models.Category;
 
-@Data
-@NoArgsConstructor
-@ToString
-public class CategoryDTO {
-    private String name;
-    private MultipartFile image;
+import java.util.List;
 
-    public static Category of(CategoryDTO categoryDTO){
-        Category category = new Category();
-        category.setName(categoryDTO.getName());
-        category.setImage(categoryDTO.getImage().getOriginalFilename());
-        return category;
+@Data
+public class CategoryDTO {
+
+    private Long id;
+    private String name;
+    private String image;
+
+    public static CategoryDTO of(Category category){
+        CategoryDTO categoryDTO = new CategoryDTO();
+        categoryDTO.setId(category.getId());
+        categoryDTO.setName(category.getName());
+        categoryDTO.setImage(category.getImage());
+        return categoryDTO;
     }
 }
