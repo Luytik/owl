@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 @RequestMapping("/upload")
 public class UploadController {
 
-    private final String IMAGEFOLDER = "./src/main/upload/images/";
+    private final String IMAGEFOLDER = "./src/main/upload/images/products/";
     private final ProductForSaleService productForSaleService;
 
     @Autowired
@@ -39,7 +39,6 @@ public class UploadController {
 
         ProductForSale productForSale = productForSaleService.convererFromDTO(productsForSaleDTO);
         productForSaleService.addProduct(productForSale);
-        System.out.println(productForSale.toString());
         try {
             uploadImageToFolder(productsForSaleDTO.getImage(), productForSale.getName());
         } catch (IOException e) {

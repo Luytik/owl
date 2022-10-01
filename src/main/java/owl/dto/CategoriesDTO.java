@@ -1,6 +1,7 @@
 package owl.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 import owl.models.Category;
 
 import java.util.ArrayList;
