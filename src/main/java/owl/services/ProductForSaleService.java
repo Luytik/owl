@@ -3,7 +3,8 @@ package owl.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import owl.dto.ProductsForSaleDTO;
+import owl.dto.ProductForSaleDTO;
+import owl.dto.ProductsForSaleDTOFromForm;
 import owl.models.Category;
 import owl.models.ProductForSale;
 import owl.repository.CategoryRepository;
@@ -36,11 +37,31 @@ public class ProductForSaleService {
     }
 
     @Transactional
-    public Optional<ProductForSale> getProductById(long id){
-        return productForSaleRepository.findById(id);
+    public ProductForSaleDTO getProductById(long id){
+        return ProductForSaleDTO.of(productForSaleRepository.findById(id).get());
     }
 
-    public ProductForSale convererFromDTO(ProductsForSaleDTO productsForSaleDTO){
+    @Transactional
+    public List<ProductForSaleDTO> getLastThreeProducts(){
+        List<ProductForSaleDTO> lastThreeProducts = new ArrayList<>();
+        ProductForSaleDTO last = new ProductForSaleDTO();
+        last = ProductForSaleDTO.of(productForSaleRepository.findTopByOrderByIdDesc());
+        long id = last.getId();
+        ProductForSaleDTO preLast = ProductForSaleDTO.of(productForSaleRepository.findById( id - 1).get());
+        ProductForSaleDTO prePreLast = ProductForSaleDTO.of(productForSaleRepository.findById( id - 2).get());
+        lastThreeProducts.add(prePreLast);
+        lastThreeProducts.add(preLast);
+        lastThreeProducts.add(last);
+
+        return lastThreeProducts;
+    }
+
+    @Transactional
+    public void deleteProduct(long id){
+        productForSaleRepository.deleteById(id);
+    }
+
+    public ProductForSale convererFromDTO(ProductsForSaleDTOFromForm productsForSaleDTO){
 
         List<Category> categories = new ArrayList<>();
 
@@ -60,5 +81,8 @@ public class ProductForSaleService {
         return productForSale;
     }
 
-
+    @Transactional
+    public List<ProductForSale> getAllProductsByCategoryId(long id){
+       return productForSaleRepository.findProductForSalesByCategoriesId(id);
+    }
 }

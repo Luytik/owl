@@ -1,5 +1,6 @@
 package owl.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import java.util.List;
 public class ProductForSale {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -27,7 +28,7 @@ public class ProductForSale {
 
     private String mainPictureUrl;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(
             name = "productForSale_category",
             joinColumns = @JoinColumn(name = "productForSale_id"),

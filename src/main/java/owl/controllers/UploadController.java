@@ -5,9 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import owl.dto.CategoriesDTO;
-import owl.dto.ProductsForSaleDTO;
-import owl.models.Category;
+import owl.dto.ProductsForSaleDTOFromForm;
 import owl.models.ProductForSale;
 import owl.services.ProductForSaleService;
 
@@ -35,17 +33,17 @@ public class UploadController {
     }
 
     @PostMapping
-    public String uploadGoodsToDB(Model model, @ModelAttribute ProductsForSaleDTO productsForSaleDTO ) {
+    public String uploadGoodsToDB(Model model, @ModelAttribute ProductsForSaleDTOFromForm roductsForSaleDTOfromForm ) {
 
-        ProductForSale productForSale = productForSaleService.convererFromDTO(productsForSaleDTO);
+        ProductForSale productForSale = productForSaleService.convererFromDTO(roductsForSaleDTOfromForm);
         productForSaleService.addProduct(productForSale);
         try {
-            uploadImageToFolder(productsForSaleDTO.getImage(), productForSale.getName());
+            uploadImageToFolder(roductsForSaleDTOfromForm.getImage(), productForSale.getName());
         } catch (IOException e) {
             e.printStackTrace();
         }
         model.addAttribute("msg", "Uploaded images: " +
-                productsForSaleDTO.getImage().getOriginalFilename());
+                roductsForSaleDTOfromForm.getImage().getOriginalFilename());
         return "uploadGoods";
     }
 
