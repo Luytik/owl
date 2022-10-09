@@ -1,10 +1,12 @@
 package owl.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import owl.dto.ProductForSaleDTO;
 import owl.dto.ProductsForSaleDTOFromForm;
+import owl.dto.QuantityDTO;
 import owl.models.Category;
 import owl.models.ProductForSale;
 import owl.repository.CategoryRepository;
@@ -32,8 +34,8 @@ public class ProductForSaleService {
     }
 
     @Transactional
-    public List<ProductForSale> getAllProducts(){
-        return productForSaleRepository.findAll();
+    public List<ProductForSale> getAllProducts(Pageable pageable){
+        return productForSaleRepository.findAll(pageable).getContent();
     }
 
     @Transactional
@@ -82,7 +84,12 @@ public class ProductForSaleService {
     }
 
     @Transactional
-    public List<ProductForSale> getAllProductsByCategoryId(long id){
-       return productForSaleRepository.findProductForSalesByCategoriesId(id);
+    public List<ProductForSale> getAllProductsByCategoryId(long categoryId, Pageable pageable){
+       return productForSaleRepository.findProductForSalesByCategoriesId(categoryId, pageable);
+    }
+
+    @Transactional
+    public QuantityDTO countProducts(){
+        return QuantityDTO.of(productForSaleRepository.count());
     }
 }
