@@ -76,4 +76,12 @@ public class ProductsRestController {
     public QuantityDTO count (){
         return productForSaleService.countProducts();
     }
+
+    @GetMapping(value = "/countByCategory/{id}")
+    public QuantityDTO countByCategory(@PathVariable("id") long id){
+        return productForSaleService.countByCategory(id);
+    }
+
+
+
 }

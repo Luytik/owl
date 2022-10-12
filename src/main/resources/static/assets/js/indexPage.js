@@ -4,7 +4,6 @@ $(document).ready(function(){
         let i;
         for (i = 0; i < holdCategories.length; i++) {
             let link = document.createElement('a');
-            link.href = 'category/' + dataCategories[i].id;
             let image = document.createElement('img');
             image.src = './upload/images/categories/' + dataCategories[i].name + '/' + dataCategories[i].image;
             image.className = 'rounded-circle img-fluid border';
@@ -17,11 +16,13 @@ $(document).ready(function(){
             let a = document.createElement('a');
             a.text = 'Go Shop';
             a.className = 'btn btn-success';
-            a.href = 'category/' + dataCategories[i].id;
+            a.href = '/shop';
             p.appendChild(a);
             holdCategories[i].appendChild(link);
             holdCategories[i].appendChild(h5);
-            holdCategories[i].appendChild(p);
+            if (i % 2 != 0) {
+                holdCategories[i].appendChild(p);
+            }
         }
     });
     $.getJSON('/products/getLastThreeProducts', function(dataLastThreeProducts) {
@@ -29,7 +30,7 @@ $(document).ready(function(){
         let holdA = document.getElementsByClassName("a h-100");
         let i;
         for(i = 0; i < holdA.length; i++){
-            holdA[i].href = "/products/" + dataLastThreeProducts[i].id;
+            holdA[i].href = "/shop-single/" + dataLastThreeProducts[i].id;
         }
         let holdImgA = document.getElementsByClassName("card-img-top");
         for(i = 0; i < holdImgA.length; i++){
@@ -38,7 +39,7 @@ $(document).ready(function(){
 
         let holdAh = document.getElementsByClassName("h2 text-decoration-none text-dark");
         for(i = 0; i < holdAh.length; i++){
-           holdAh[i].href = "/products/" + dataLastThreeProducts[i].id;
+           holdAh[i].href = "/shop-single/" + dataLastThreeProducts[i].id;
            holdAh[i].textContent = dataLastThreeProducts[i].name;
         }
 

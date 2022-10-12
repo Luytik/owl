@@ -92,4 +92,10 @@ public class ProductForSaleService {
     public QuantityDTO countProducts(){
         return QuantityDTO.of(productForSaleRepository.count());
     }
+
+    @Transactional
+    public QuantityDTO countByCategory(long id){
+        long c = productForSaleRepository.countProductForSalesByCategoriesId(id);
+        return QuantityDTO.of(c);
+    }
 }

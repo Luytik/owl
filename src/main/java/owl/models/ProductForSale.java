@@ -20,9 +20,7 @@ public class ProductForSale {
     @Column(nullable = false, unique = true)
     private String name;
 
-    private String shortDescriprion;
-
-    private String longDescriprion;
+    private String descriprion;
     @Column(nullable = false)
     private String price;
 
@@ -40,8 +38,7 @@ public class ProductForSale {
 
     public ProductForSale(String name, String shortDescriprion, String longDescriprion, String price, String mainPictureUrl) {
         this.name = name;
-        this.shortDescriprion = shortDescriprion;
-        this.longDescriprion = longDescriprion;
+        this.descriprion = longDescriprion;
         this.price = price;
         this.mainPictureUrl = mainPictureUrl;
     }
