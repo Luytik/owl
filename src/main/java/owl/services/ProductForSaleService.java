@@ -63,7 +63,8 @@ public class ProductForSaleService {
         productForSaleRepository.deleteById(id);
     }
 
-    public ProductForSale convererFromDTO(ProductsForSaleDTOFromForm productsForSaleDTO){
+
+  /*  public ProductForSale converterFromDTO(ProductsForSaleDTOFromForm productsForSaleDTO){
 
         List<Category> categories = new ArrayList<>();
 
@@ -74,12 +75,26 @@ public class ProductForSaleService {
 
         ProductForSale productForSale = new ProductForSale();
         productForSale.setName(productsForSaleDTO.getName());
-        productForSale.setShortDescriprion(productsForSaleDTO.getShortDescriprion());
-        productForSale.setLongDescriprion(productsForSaleDTO.getLongDescriprion());
+        productForSale.setDescription(productsForSaleDTO.getDescriprion());
         productForSale.setPrice(productsForSaleDTO.getPrice());
-        productForSale.setMainPictureUrl(productsForSaleDTO.getImage().getOriginalFilename());
         productForSale.setCategories(categories);
 
+        return productForSale;
+    }*/
+
+    public ProductForSale FromFormToProduct(ProductsForSaleDTOFromForm productsForSaleDTOFromForm){
+        List<Category> categories = new ArrayList<>();
+        ProductForSale productForSale = new ProductForSale();
+        productForSale.setName(productsForSaleDTOFromForm.getName());
+        productForSale.setDescription(productsForSaleDTOFromForm.getDescriprion());
+        productForSale.setPrice(productForSale.getPrice());
+        if(productsForSaleDTOFromForm.getCategories() != null) {
+            for (String categoryName : productsForSaleDTOFromForm.getCategories()) {
+                Category category = categoryRepository.findCategoryByName(categoryName);
+                categories.add(category);
+            }
+        }
+        productForSale.setCyrillicName();
         return productForSale;
     }
 

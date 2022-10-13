@@ -11,13 +11,13 @@ import java.util.List;
 @Data
 public class CategoryDTO {
 
-    private Long id;
+    private String id;
     private String name;
     private String image;
 
     public static CategoryDTO of(Category category){
         CategoryDTO categoryDTO = new CategoryDTO();
-        categoryDTO.setId(category.getId());
+        categoryDTO.setId(String.valueOf(category.getId()));
         categoryDTO.setName(category.getName());
         categoryDTO.setImage(category.getImage());
         return categoryDTO;

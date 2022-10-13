@@ -1,0 +1,16 @@
+
+#additionalImagesResult{
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+}
+.thumbnail {
+    height: 200px;
+}
+
+#mainImageResult{
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+}
+

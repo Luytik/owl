@@ -14,7 +14,9 @@ public class AppConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/upload/**").addResourceLocations("file:///" + System.getProperty("user.dir") + "/src/main/upload/");
+        registry.addResourceHandler("/upload/**", "/css/**", "/js/**")
+                .addResourceLocations("file:///" + System.getProperty("user.dir") + "/src/main/upload/",
+                        "classpath:/static/assets/css/", "classpath:/static/assets/js/");
     }
 
    /* @Bean

@@ -2,6 +2,7 @@ package owl.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import owl.services.FromCyrillicToLatin;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,14 +18,13 @@ public class ProductForSale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
     private String name;
 
-    private String descriprion;
-    @Column(nullable = false)
-    private String price;
+    private String description;
 
-    private String mainPictureUrl;
+    private String cyrillicName;
+
+    private String price;
 
     @ManyToMany()
     @JoinTable(
@@ -34,12 +34,13 @@ public class ProductForSale {
     )
     private List<Category> categories;
 
+    public void setCyrillicName(){
+        this.cyrillicName = FromCyrillicToLatin.transliterate(name);
+    }
 
-
-    public ProductForSale(String name, String shortDescriprion, String longDescriprion, String price, String mainPictureUrl) {
+    public ProductForSale(String name, String description, String price) {
         this.name = name;
-        this.descriprion = longDescriprion;
+        this.description = description;
         this.price = price;
-        this.mainPictureUrl = mainPictureUrl;
     }
 }
