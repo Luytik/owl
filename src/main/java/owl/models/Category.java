@@ -1,6 +1,7 @@
 package owl.models;
 
 import lombok.*;
+import owl.services.FromCyrillicToLatin;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,7 +18,8 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
-    private String image;
+    private String cyrillicName;
+    private String imageName;
 
     @ManyToMany
     @JoinTable(
@@ -51,6 +53,10 @@ public class Category {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public  void setCyrillicName(){
+        this.cyrillicName = FromCyrillicToLatin.transliterate(name);
     }
 
     @Override

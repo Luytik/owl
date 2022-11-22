@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ProductsForSaleDTOFromForm {
     private String name;
-    private String descriprion;
+    private String description;
     private String price;
     private List<String> categories;
     private MultipartFile mainImage;
@@ -27,7 +27,7 @@ public class ProductsForSaleDTOFromForm {
     public String toString() {
         return "ProductsForSaleDTOFromForm{" +
                 "name='" + name + '\'' +
-                ", descriprion='" + descriprion + '\'' +
+                ", descriprion='" + description + '\'' +
                 ", price='" + price + '\'' +
                 ", categories=" + categories +
                 ", mainImage=" + mainImage.getOriginalFilename() +

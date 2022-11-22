@@ -32,29 +32,31 @@ public class CategoriesController {
 
     @PostMapping("/add")
     public String addNewCategory(@ModelAttribute CategoryDtoFromForm categoryDTO){
-        Category category;
-        category = CategoryDtoFromForm.of(categoryDTO);
+        Category category = CategoryDtoFromForm.of(categoryDTO);
+        String folderName = category.getCyrillicName();
+
         categoryService.addCategory(category);
         try {
-            uploadImageToFolder(categoryDTO.getImage(), categoryDTO.getName());
+            uploadImageToFolder(categoryDTO.getImage(), folderName, "1");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return "addcategory";
     }
-
+    //    /categories/addForm
     @GetMapping("/addForm")
     public String getForm(){
         return "addcategory";
     }
 
-    private void uploadImageToFolder(MultipartFile image, String name) throws IOException{
+    private void uploadImageToFolder(MultipartFile image, String folderName, String imageName) throws IOException {
         StringBuilder folderPath = new StringBuilder(IMAGEFOLDER);
-        folderPath.append(name);
+        folderPath.append(folderName);
         File folderForProductImage = new File(folderPath.toString());
         folderForProductImage.mkdir();
-        Path pathToImage = Paths.get(folderForProductImage.toString(), image.getOriginalFilename());
+        Path pathToImage = Paths.get(folderForProductImage.toString(), imageName + "." +
+                image.getOriginalFilename().split("\\.")[1]);
         Files.write(pathToImage, image.getBytes());
     }
 

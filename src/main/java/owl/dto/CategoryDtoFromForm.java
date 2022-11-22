@@ -16,7 +16,7 @@ public class CategoryDtoFromForm {
     public static Category of(CategoryDtoFromForm categoryDTO){
         Category category = new Category();
         category.setName(categoryDTO.getName());
-        category.setImage(categoryDTO.getImage().getOriginalFilename());
+        category.setCyrillicName();
         return category;
     }
 }

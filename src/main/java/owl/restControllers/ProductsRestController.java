@@ -2,31 +2,33 @@ package owl.restControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import owl.dto.ProductForSaleDTO;
+import owl.dto.ProductsForSaleDTOFromForm;
 import owl.dto.QuantityDTO;
+import owl.models.Category;
 import owl.models.ProductForSale;
+import owl.repository.CategoryRepository;
 import owl.services.CategoryService;
 import owl.services.ProductForSaleService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
 public class ProductsRestController {
 
     private final ProductForSaleService productForSaleService;
+    private final CategoryRepository categoryRepository;
     private final CategoryService categoryService;
     static final int ITEMS_PER_PAGE = 9;
 
     @Autowired
-    public ProductsRestController(ProductForSaleService productForSaleService, CategoryService categoryService) {
+    public ProductsRestController(ProductForSaleService productForSaleService, CategoryRepository categoryRepository, CategoryService categoryService) {
         this.productForSaleService = productForSaleService;
+        this.categoryRepository = categoryRepository;
         this.categoryService = categoryService;
     }
 
@@ -35,9 +37,10 @@ public class ProductsRestController {
         return productForSaleService.getLastThreeProducts();
     }
 
-    @GetMapping("/delete")
-    public void deleteSMT() {
-        productForSaleService.deleteProduct(31l);
+    // "/products/deleteProduct/{id}"
+    @GetMapping("/deleteProduct/{id}")
+    public void deleteSMT(@PathVariable("id")long id) {
+        productForSaleService.deleteProduct(id);
     }
 
     //  /products/all
@@ -69,7 +72,7 @@ public class ProductsRestController {
 
     @GetMapping("/{id}")
     public ProductForSaleDTO getProductById(@PathVariable("id") long id) {
-        return productForSaleService.getProductById(id);
+        return productForSaleService.getProductDTOById(id);
     }
 
     @GetMapping(value = "/count")
@@ -79,9 +82,7 @@ public class ProductsRestController {
 
     @GetMapping(value = "/countByCategory/{id}")
     public QuantityDTO countByCategory(@PathVariable("id") long id){
-        return productForSaleService.countByCategory(id);
+        QuantityDTO q = productForSaleService.countByCategory(id);
+        return q;
     }
-
-
-
 }

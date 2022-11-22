@@ -1,0 +1,30 @@
+/*
+Custom Css
+*/
+.testBl{
+    max-width: 30%;
+}
+.testBl img{
+    width: 100%;
+    height: 70%;
+}
+
+.card-item {
+    height: 400px;
+    width: 100%;
+}
+
+.img-section {
+    height: 70%;
+    width: 100%;
+}
+
+.img-section img {
+    height: 100%;
+    width: 100%;
+}
+
+.adm-add {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,6 +1,5 @@
 $(document).ready(function () {
     $.getJSON('/categories/getAllCategories', function (dataCategories) {
-
         let hold = document.getElementById('categroiesList');
         let a = document.createElement('a');
         a.onclick = function () {
@@ -79,18 +78,24 @@ function loadAllProducts(page) {
             let liEye = document.createElement('li');
             let aEye = document.createElement('a');
             aEye.className = 'btn btn-success text-white mt-2';
-            aEye.href = "/shop-single/" + dataProducts[i].id;
+            aEye.href = "/edit/" + dataProducts[i].id;
             let iEye = document.createElement('i');
-            iEye.className = 'far fa-eye';
+            iEye.className = 'far fa-edit';
             aEye.appendChild(iEye);
             liEye.appendChild(aEye);
             ul.appendChild(liEye);
             let liCart = document.createElement('li');
             let aCart = document.createElement('a');
             aCart.className = 'btn btn-success text-white mt-2';
-            aCart.href = "/profile/cart/addtocart/" + dataProducts[i].id;
+            let id = dataProducts[i].id;
+            console.log('id' + id);
+            console.log(id);
+            aCart.onclick = function () {
+                deleteAndLoad(id);
+            };
             let iCart = document.createElement('i');
-            iCart.className = 'fas fa-cart-plus';
+            iCart.className = 'fas fa-times';
+            iCart.style = "color: RED";
             aCart.appendChild(iCart);
             liCart.appendChild(aCart);
             ul.appendChild(liCart);
@@ -104,7 +109,7 @@ function loadAllProducts(page) {
             div_card_body.className = 'card-body';
             let aCardBody = document.createElement('a');
             aCardBody.className = 'h3 text-decoration-none';
-            aCardBody.href = "/shop-single/" + dataProducts[i].id;
+            aCardBody.href = "/edit/" + dataProducts[i].id;
             aCardBody.text = dataProducts[i].name;
             div_card_body.appendChild(aCardBody);
             let pCardBody = document.createElement('p');
@@ -120,8 +125,6 @@ function loadAllProducts(page) {
 function loadPagesByCategory(id) {
 
     $.getJSON('/products/countByCategory/' + id, function (products) {
-        console.log('idCategory is ' + id);
-        console.log('product length is' + products.length);
         let holdPages = document.getElementById("pages");
         holdPages.textContent = '';
         let pageCount = products.quantity / 9 + (products.quantity % 9 > 0 ? 1 : 0);
@@ -174,18 +177,21 @@ function loadContentByCategory(categoryId, page){
             let liEye = document.createElement('li');
             let aEye = document.createElement('a');
             aEye.className = 'btn btn-success text-white mt-2';
-            aEye.href = "/shop-single/" + dataProducts[i].id;
+            aEye.href = "/edit/" + dataProducts[i].id;
             let iEye = document.createElement('i');
-            iEye.className = 'far fa-eye';
+            iEye.className = 'far fa-edit';
             aEye.appendChild(iEye);
             liEye.appendChild(aEye);
             ul.appendChild(liEye);
             let liCart = document.createElement('li');
             let aCart = document.createElement('a');
             aCart.className = 'btn btn-success text-white mt-2';
-            aCart.href = "/profile/cart/addtocart/" + dataProducts[i].id;
+            aCart.onclick = function () {
+                deleteAndLoad(dataProducts[i].id);
+            };
             let iCart = document.createElement('i');
-            iCart.className = 'fas fa-cart-plus';
+            iCart.className = 'fas fa-times';
+            iCart.style = "color: RED";
             aCart.appendChild(iCart);
             liCart.appendChild(aCart);
             ul.appendChild(liCart);
@@ -199,7 +205,7 @@ function loadContentByCategory(categoryId, page){
             div_card_body.className = 'card-body';
             let aCardBody = document.createElement('a');
             aCardBody.className = 'h3 text-decoration-none';
-            aCardBody.href = "/shop-single/" + dataProducts[i].id;
+            aCardBody.href = "/edit/" + dataProducts[i].id;
             aCardBody.text = dataProducts[i].name;
             div_card_body.appendChild(aCardBody);
             let pCardBody = document.createElement('p');
@@ -215,5 +221,18 @@ function loadContentByCategory(categoryId, page){
 function loadProducts(){
     loadPages();
     loadAllProducts(0);
+}
+
+function deleteProduct(id){
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", '/products/deleteProduct/' + id, false ); // false for synchronous request
+    xmlHttp.send( null );
+    console.log('in deleteProduct(id)');
+}
+
+function deleteAndLoad(id){
+    deleteProduct(id);
+    loadProducts();
+    console.log('in deleteAndLoad(id)');
 }
 

@@ -39,7 +39,7 @@ public class ProductForSaleService {
     }
 
     @Transactional
-    public ProductForSaleDTO getProductById(long id){
+    public ProductForSaleDTO getProductDTOById(long id){
         return ProductForSaleDTO.of(productForSaleRepository.findById(id).get());
     }
 
@@ -63,37 +63,19 @@ public class ProductForSaleService {
         productForSaleRepository.deleteById(id);
     }
 
-
-  /*  public ProductForSale converterFromDTO(ProductsForSaleDTOFromForm productsForSaleDTO){
-
-        List<Category> categories = new ArrayList<>();
-
-        for(String name: productsForSaleDTO.getCategories()){
-            Category category = categoryRepository.findCategoryByName(name);
-            categories.add(category);
-        }
-
-        ProductForSale productForSale = new ProductForSale();
-        productForSale.setName(productsForSaleDTO.getName());
-        productForSale.setDescription(productsForSaleDTO.getDescriprion());
-        productForSale.setPrice(productsForSaleDTO.getPrice());
-        productForSale.setCategories(categories);
-
-        return productForSale;
-    }*/
-
     public ProductForSale FromFormToProduct(ProductsForSaleDTOFromForm productsForSaleDTOFromForm){
         List<Category> categories = new ArrayList<>();
         ProductForSale productForSale = new ProductForSale();
         productForSale.setName(productsForSaleDTOFromForm.getName());
-        productForSale.setDescription(productsForSaleDTOFromForm.getDescriprion());
-        productForSale.setPrice(productForSale.getPrice());
+        productForSale.setDescription(productsForSaleDTOFromForm.getDescription());
+        productForSale.setPrice(productsForSaleDTOFromForm.getPrice());
         if(productsForSaleDTOFromForm.getCategories() != null) {
             for (String categoryName : productsForSaleDTOFromForm.getCategories()) {
                 Category category = categoryRepository.findCategoryByName(categoryName);
                 categories.add(category);
             }
         }
+        productForSale.setCategories(categories);
         productForSale.setCyrillicName();
         return productForSale;
     }
@@ -111,6 +93,17 @@ public class ProductForSaleService {
     @Transactional
     public QuantityDTO countByCategory(long id){
         long c = productForSaleRepository.countProductForSalesByCategoriesId(id);
-        return QuantityDTO.of(c);
+        QuantityDTO q = QuantityDTO.of(c);
+        return q;
+    }
+
+    @Transactional
+    public ProductForSale getProductById(long id){
+        return productForSaleRepository.getReferenceById(id);
+    }
+
+    @Transactional
+    public void updateProduct(ProductForSale productForSale){
+        productForSaleRepository.save(productForSale);
     }
 }
