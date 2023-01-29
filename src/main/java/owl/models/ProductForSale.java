@@ -1,17 +1,17 @@
 package owl.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import owl.services.FromCyrillicToLatin;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString
 public class ProductForSale {
 
     @Id
@@ -26,6 +26,8 @@ public class ProductForSale {
 
     private String price;
 
+    private String mainImageName;
+
     @ManyToMany()
     @JoinTable(
             name = "productForSale_category",
@@ -37,6 +39,12 @@ public class ProductForSale {
     public void setCyrillicName(){
         this.cyrillicName = FromCyrillicToLatin.transliterate(name);
     }
+
+    @OneToMany(mappedBy = "productForSale", cascade = CascadeType.ALL)
+    private List<ProductsInOrder> productsList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "productForSale", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<SecondaryImageNames> secondaryImageNames = new ArrayList<>();
 
     public ProductForSale(String name, String description, String price) {
         this.name = name;

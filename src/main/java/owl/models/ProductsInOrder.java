@@ -2,22 +2,25 @@ package owl.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
-@Entity
 @Data
 @NoArgsConstructor
+@Entity
 public class ProductsInOrder {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinTable(name = "Orders_id")
-    private Orders orders;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UserOrder_id")
+    private UserOrder order;
 
-    private Long product_id;
+    @ManyToOne
+    @JoinColumn(name = "productForSale_id")
+    private ProductForSale productForSale;
+
     private Integer quantity;
+    private String pricePerProduct;
 }

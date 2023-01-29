@@ -69,7 +69,7 @@ function loadAllProducts(page) {
             card_rounded_0.className = "card rounded-0 img-section";
             let img = document.createElement('img');
             img.className = 'card-img rounded-0 img-fluid';
-            img.src = './upload/images/products/' + dataProducts[i].cyrillicName + '/' + dataProducts[i].imageNames[0];
+            img.src = '/upload/images/products/' + dataProducts[i].cyrillicName + '/' + dataProducts[i].imageNames[0];
             let card_img = document.createElement('div');
             card_img.className = 'card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center';
             let ul = document.createElement('ul');
@@ -78,7 +78,7 @@ function loadAllProducts(page) {
             let liEye = document.createElement('li');
             let aEye = document.createElement('a');
             aEye.className = 'btn btn-success text-white mt-2';
-            aEye.href = "/edit/" + dataProducts[i].id;
+            aEye.href = "/admin/product/edit/" + dataProducts[i].id;
             let iEye = document.createElement('i');
             iEye.className = 'far fa-edit';
             aEye.appendChild(iEye);
@@ -109,7 +109,7 @@ function loadAllProducts(page) {
             div_card_body.className = 'card-body';
             let aCardBody = document.createElement('a');
             aCardBody.className = 'h3 text-decoration-none';
-            aCardBody.href = "/edit/" + dataProducts[i].id;
+            aCardBody.href = "/admin/product/edit/" + dataProducts[i].id;
             aCardBody.text = dataProducts[i].name;
             div_card_body.appendChild(aCardBody);
             let pCardBody = document.createElement('p');
@@ -168,7 +168,7 @@ function loadContentByCategory(categoryId, page){
             card_rounded_0.className = "card rounded-0 img-section";
             let img = document.createElement('img');
             img.className = 'card-img rounded-0 img-fluid';
-            img.src = './upload/images/products/' + dataProducts[i].cyrillicName + '/' + dataProducts[i].imageNames[0];
+            img.src = '/upload/images/products/' + dataProducts[i].cyrillicName + '/' + dataProducts[i].imageNames[0];
             let card_img = document.createElement('div');
             card_img.className = 'card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center';
             let ul = document.createElement('ul');
@@ -177,7 +177,7 @@ function loadContentByCategory(categoryId, page){
             let liEye = document.createElement('li');
             let aEye = document.createElement('a');
             aEye.className = 'btn btn-success text-white mt-2';
-            aEye.href = "/edit/" + dataProducts[i].id;
+            aEye.href = "/admin/product/edit/" + dataProducts[i].id;
             let iEye = document.createElement('i');
             iEye.className = 'far fa-edit';
             aEye.appendChild(iEye);
@@ -205,7 +205,7 @@ function loadContentByCategory(categoryId, page){
             div_card_body.className = 'card-body';
             let aCardBody = document.createElement('a');
             aCardBody.className = 'h3 text-decoration-none';
-            aCardBody.href = "/edit/" + dataProducts[i].id;
+            aCardBody.href = "/admin/product/edit/" + dataProducts[i].id;
             aCardBody.text = dataProducts[i].name;
             div_card_body.appendChild(aCardBody);
             let pCardBody = document.createElement('p');

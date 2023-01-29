@@ -14,7 +14,6 @@ import owl.repository.ProductForSaleRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductForSaleService {
@@ -47,14 +46,26 @@ public class ProductForSaleService {
     public List<ProductForSaleDTO> getLastThreeProducts(){
         List<ProductForSaleDTO> lastThreeProducts = new ArrayList<>();
         ProductForSaleDTO last = new ProductForSaleDTO();
-        last = ProductForSaleDTO.of(productForSaleRepository.findTopByOrderByIdDesc());
+        try {
+            last = ProductForSaleDTO.of(productForSaleRepository.findTopByOrderByIdDesc());    
+        } catch (NullPointerException e) {
+            return lastThreeProducts;
+        } 
+        
         long id = last.getId();
-        ProductForSaleDTO preLast = ProductForSaleDTO.of(productForSaleRepository.findById( id - 1).get());
-        ProductForSaleDTO prePreLast = ProductForSaleDTO.of(productForSaleRepository.findById( id - 2).get());
-        lastThreeProducts.add(prePreLast);
-        lastThreeProducts.add(preLast);
-        lastThreeProducts.add(last);
 
+        if(id < 2){
+            lastThreeProducts.add(last);        
+        } else if(id < 3) {
+            ProductForSaleDTO preLast = ProductForSaleDTO.of(productForSaleRepository.findById( id - 1).get());
+            lastThreeProducts.add(preLast);
+        } else {            
+            ProductForSaleDTO preLast = ProductForSaleDTO.of(productForSaleRepository.findById( id - 1).get());
+            ProductForSaleDTO prePreLast = ProductForSaleDTO.of(productForSaleRepository.findById( id - 2).get());
+            lastThreeProducts.add(prePreLast);
+            lastThreeProducts.add(preLast);
+            lastThreeProducts.add(last);
+        }
         return lastThreeProducts;
     }
 
@@ -106,4 +117,5 @@ public class ProductForSaleService {
     public void updateProduct(ProductForSale productForSale){
         productForSaleRepository.save(productForSale);
     }
+        
 }

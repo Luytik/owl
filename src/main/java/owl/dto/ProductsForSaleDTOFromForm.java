@@ -2,12 +2,7 @@ package owl.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.springframework.web.multipart.MultipartFile;
-import owl.models.Category;
-import owl.models.ProductForSale;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

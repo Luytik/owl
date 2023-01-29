@@ -19,7 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Controller
-@RequestMapping("/categories")
+@RequestMapping("admin/categories")
 public class CategoriesController {
 
     private final String IMAGEFOLDER = "./src/main/upload/images/categories/";
@@ -33,11 +33,13 @@ public class CategoriesController {
     @PostMapping("/add")
     public String addNewCategory(@ModelAttribute CategoryDtoFromForm categoryDTO){
         Category category = CategoryDtoFromForm.of(categoryDTO);
+        
         String folderName = category.getCyrillicName();
-
+        category.setImageName(categoryDTO.getImage().getOriginalFilename());
+        
         categoryService.addCategory(category);
         try {
-            uploadImageToFolder(categoryDTO.getImage(), folderName, "1");
+            uploadImageToFolder(categoryDTO.getImage(), folderName, categoryDTO.getImage().getOriginalFilename());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,7 +47,7 @@ public class CategoriesController {
         return "addcategory";
     }
     //    /categories/addForm
-    @GetMapping("/addForm")
+    @GetMapping("/addnew")
     public String getForm(){
         return "addcategory";
     }
@@ -55,8 +57,7 @@ public class CategoriesController {
         folderPath.append(folderName);
         File folderForProductImage = new File(folderPath.toString());
         folderForProductImage.mkdir();
-        Path pathToImage = Paths.get(folderForProductImage.toString(), imageName + "." +
-                image.getOriginalFilename().split("\\.")[1]);
+        Path pathToImage = Paths.get(folderForProductImage.toString(), imageName);
         Files.write(pathToImage, image.getBytes());
     }
 

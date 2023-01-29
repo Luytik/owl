@@ -34,7 +34,7 @@ $(document).ready(function(){
         }
         let holdImgA = document.getElementsByClassName("card-img-top");
         for(i = 0; i < holdImgA.length; i++){
-            holdImgA[i].src = './upload/images/products/' + dataLastThreeProducts[i].cyrillicName + '/' + dataLastThreeProducts[i].imageNames[0];
+            holdImgA[i].src = './upload/images/products/' + dataLastThreeProducts[i].cyrillicName + '/' + dataLastThreeProducts[i].mainImageName;
         }
 
         let holdAh = document.getElementsByClassName("h2 text-decoration-none text-dark");
@@ -47,9 +47,6 @@ $(document).ready(function(){
         for(i = 0; i < pList.length; i++){
             pList[i].textContent = dataLastThreeProducts[i].shortDescriprion;
         }
-
-
-
     });
 
 });

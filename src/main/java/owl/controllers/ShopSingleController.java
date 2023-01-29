@@ -11,6 +11,6 @@ public class ShopSingleController {
 
     @GetMapping
     public String getShopPage(@PathVariable("id") long id){
-        return "shop-single.html";
+        return "shop-single";
     }
 }

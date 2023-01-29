@@ -11,4 +11,5 @@ public interface ProductForSaleRepository extends JpaRepository<ProductForSale, 
     ProductForSale findTopByOrderByIdDesc();
     List<ProductForSale> findProductForSalesByCategoriesId(long id, Pageable pageable);
     long countProductForSalesByCategoriesId(long id);
+    //void updateById(long id);
 }

@@ -11,8 +11,6 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-
-
 public class User {
 
     @Id
@@ -23,18 +21,22 @@ public class User {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Orders> orderList = new ArrayList<>();
-
     @ManyToMany
     @JoinTable(name = "users_roles",
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserOrder> orders = new ArrayList<>();
+    
+
+
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
     }
+
+    
 }

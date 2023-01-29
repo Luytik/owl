@@ -26,13 +26,13 @@ public class EditProductController {
         this.categoryRepository = categoryRepository;
     }
 
-    @GetMapping("/edit/{idProduct}")
+    @GetMapping("admin/product/edit/{idProduct}")
     public String editProduct(@PathVariable("idProduct") long id) {
         return "editProduct";
     }
 
     //  "/edit/" + {idProduct}
-    @PostMapping("/edit/{idProduct}")
+    @PostMapping("admin/edit/{idProduct}")
     public String updateProduct(@PathVariable("idProduct") long id,
                                         @ModelAttribute ProductsForSaleDTOFromForm productsForSaleDTOfromForm){
         ProductForSale productForSale = productForSaleService.getProductById(id);
@@ -48,7 +48,7 @@ public class EditProductController {
         }
         productForSale.setCategories(categories);
         productForSaleService.addProduct(productForSale);
-        //return ResponseEntity.status(HttpStatus.OK).location(URI.create("/productList/")).build();
+    
         return "redirect:/productList";
     }
 }

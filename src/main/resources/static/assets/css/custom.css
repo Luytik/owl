@@ -28,3 +28,44 @@ Custom Css
     display: flex;
     justify-content: space-between;
 }
+.a-cargs_position {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 200px;
+}
+.a-cargs_position_image {
+    width: 20%;
+}
+.a-cargs_position_image img {
+    max-width: 100%;
+}
+.a-cargs_position_name {
+    width: 50%;
+}
+.a-cargs_position_price {
+    width: 10%;
+}
+.a-cargs_position_num {
+    width: 10%;
+}
+.a-cargs_position_btn {
+    width: 5%;
+    min-width: 45px;
+}
+.a-cargs_position_num input{
+    max-width: 100%;
+}
+.a-buy{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+.a-buy button{
+    max-width: 30%;
+}
+
+.a-cargs_position_order{
+    width: 12%;
+}
+

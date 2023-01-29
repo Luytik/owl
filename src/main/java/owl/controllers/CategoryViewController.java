@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/category")
+@RequestMapping("admin/category")
 public class CategoryViewController {
 
     @GetMapping("/{id}")

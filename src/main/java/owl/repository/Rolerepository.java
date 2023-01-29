@@ -6,4 +6,5 @@ import owl.models.Role;
 
 @Repository
 public interface Rolerepository extends JpaRepository<Role, Long> {
+    Role findByName(String name);
 }

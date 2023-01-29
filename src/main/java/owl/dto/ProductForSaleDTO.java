@@ -3,10 +3,13 @@ package owl.dto;
 import lombok.Data;
 import owl.models.Category;
 import owl.models.ProductForSale;
+import owl.models.SecondaryImageNames;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Data
@@ -17,6 +20,7 @@ public class ProductForSaleDTO {
     private String description;
     private String price;
     private String cyrillicName;
+    private String mainImageName;
     private List<String> categories;
     private List<String> imageNames = new ArrayList<>();
 
@@ -27,17 +31,15 @@ public class ProductForSaleDTO {
         prDTO.setDescription(productForSale.getDescription());
         prDTO.setPrice(productForSale.getPrice());
         prDTO.setCyrillicName(productForSale.getCyrillicName());
-        prDTO.setImageNames();
+        prDTO.setMainImageName(productForSale.getMainImageName());
+        prDTO.setImageNamesAsString(productForSale);
         prDTO.setCategories(CategoriesDTO.asStringList(productForSale.getCategories()));
         return prDTO;
     }
 
-    public void setImageNames(){
-        String IMAGEFOLDER = "./src/main/upload/images/products/" + cyrillicName;
-        File folder = new File(IMAGEFOLDER);
-        for(File image : folder.listFiles()){
-            imageNames.add(image.getName());
+    private void setImageNamesAsString(ProductForSale productForSale){
+        for(SecondaryImageNames s : productForSale.getSecondaryImageNames()){
+            imageNames.add(s.getName());
         }
-
     }
 }
