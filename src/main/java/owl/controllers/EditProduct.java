@@ -64,7 +64,7 @@ public class EditProduct {
                 }
                 uploadImageToFolder(productsForSaleDTOfromForm.getAdditionalImages()[i],
                         folderName, productsForSaleDTOfromForm.getAdditionalImages()[i].getOriginalFilename());
-                var additionalImageName = new SecondaryImageNames(productsForSaleDTOfromForm.getAdditionalImages()[i]
+                        SecondaryImageNames additionalImageName = new SecondaryImageNames(productsForSaleDTOfromForm.getAdditionalImages()[i]
                                                 .getOriginalFilename());
                 additionalImageNames.add(additionalImageName);
             }
