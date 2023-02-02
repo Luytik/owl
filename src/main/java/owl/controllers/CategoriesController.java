@@ -56,7 +56,7 @@ public class CategoriesController {
         StringBuilder folderPath = new StringBuilder(IMAGEFOLDER);
         folderPath.append(folderName);
         File folderForProductImage = new File(folderPath.toString());
-        folderForProductImage.mkdir();
+        folderForProductImage.mkdirs();
         Path pathToImage = Paths.get(folderForProductImage.toString(), imageName);
         Files.write(pathToImage, image.getBytes());
     }
