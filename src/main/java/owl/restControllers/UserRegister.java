@@ -1,6 +1,9 @@
 package owl.restControllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,7 +31,7 @@ public class UserRegister {
     }
 
     @PostMapping("/newUser")
-    public void addNewUser(@ModelAttribute User user){
+    public void addNewUser(@ModelAttribute User user, HttpServletResponse response) throws IOException{
         Role role = roleService.findByName("user");
         ArrayList<Role> roles = new ArrayList<>();
         roles.add(role);
@@ -36,5 +39,7 @@ public class UserRegister {
         String password = user.getPassword();
         user.setPassword(passwordEncoder.encode(password));
         userService.addUser(user);
+        response.sendRedirect("/index");
+
     }
 }
